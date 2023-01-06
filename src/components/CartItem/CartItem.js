@@ -1,6 +1,6 @@
 import "./CartItem.css";
 import { useDispatch} from 'react-redux';
-import {add,removeFromCart} from "../../reducers/cartReducer";
+import {add,removeFromCart,decreaseCart} from "../../reducers/cartReducer";
 
 function CartItem(props) {
   const items=props.item;
@@ -14,8 +14,14 @@ function CartItem(props) {
     dispatch(removeFromCart(items.id));
   }
   const handelAddItemQuantity=()=>{
-    console.log("item++")
+    console.log("Ready to Increement Quantity")
     dispatch(add(items))
+  }
+  const handelRemoveQuantity=()=>{
+    console.log("Ready to Reduce Quantity")
+    // using dispatch to send remove action and payload.
+
+    dispatch(decreaseCart(items));
   }
   
   return (
@@ -28,7 +34,8 @@ function CartItem(props) {
       </div>
       <p>{props.item.price}</p>
       <div>
-        <button onClick={handelAddItemQuantity} className="btn btn-success">+</button>
+        <button onClick={handelAddItemQuantity} className="btn btn-success">+</button>{' '}
+        <button onClick={handelRemoveQuantity} className="btn btn-success">-</button>
       </div>
       <p>{props.item.quantity}X{props.item.price}={props.item.quantity * props.item.price}</p>
     </div>

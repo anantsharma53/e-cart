@@ -3,7 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 // initially there are no items in the cart.
 const initialState ={
      value: [],
-     totalQuantity: 0,
+     totalQuantity:0,
+     totalAmount:0
 }
 // 2. Create the reducer.
 // use createSlice function.
@@ -34,25 +35,35 @@ const cartSlice = createSlice({
                 state.value=filteredCart;
             
         },
-        // getTotal: (state)=>{
-
-        //     const {price, quantity} = state.value.reduce((cartTotal,currentItem)=>{
-        //        const {price,quantity} = currentItem;
-        //        const itemTotal = price * quantity;
-
-        //        cartTotal.price += itemTotal;
-        //        cartTotal.quantity += quantity;
-
-        //        return cartTotal;
-        //     },
-        //     {
-        //         price: 0,
-        //         quantity: 0
-        //     });
-
-        //     state.totalQuantity = quantity;
-        //     state.totalPrice = parseFloat(price.toFixed(2));;
-        // }
+        decreaseCart: (state,action)=>{
+            //If item's quantity is >1, then decrement the quantity
+            //If Item's quantity is =1, then remove that item from list.
+            const itemIndex = state.value.findIndex((item)=>item.id === action.payload.id);
+            if(state.value[itemIndex].quantity > 1){
+                state.value[itemIndex].quantity -= 1;
+            }else if(state.value[itemIndex].quantity === 1){
+                state.value = state.value.filter((item)=>item.id !== action.payload.id);
+            }
+        },
+        getTotal: (state)=>{
+            console.log(state)
+            const {price,quantity}=state.value.reduce(
+                (cartTotal,cartItem)=>{
+                    const{price,quantity}=cartItem;
+                    const itemTotal=price*quantity;
+                    cartTotal.price +=itemTotal;
+                    cartTotal.quantity+=quantity;
+                    return cartTotal;
+                    
+            },
+            {
+                total:0,
+                quantity:0
+            });
+            state.totalQuantity=quantity;
+            state.totalAmount=parseFloat(price);
+            console.log(price);
+        }
         
         },
         
@@ -60,7 +71,7 @@ const cartSlice = createSlice({
     
 });
 // exporting actions for components to call.
-export const { add, removeFromCart,addSameItem} = cartSlice.actions;
+export const { add, removeFromCart,decreaseCart,getTotal} = cartSlice.actions;
 // selector to select cart data.
 export const cartSelector = (state)=> state.cartItems.value;
 export default cartSlice.reducer;

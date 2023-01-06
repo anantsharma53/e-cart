@@ -1,19 +1,32 @@
 import Header from "../../components/Shared/Header/Header";
 import CartItem from "../../components/CartItem/CartItem";
-import { useSelector } from "react-redux";
-import { cartSelector } from "../../reducers/cartReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { cartSelector} from "../../reducers/cartReducer";
+import { getTotal } from "../../reducers/cartReducer";
+import { useEffect } from "react";
 function Cart(props) {
-  const items=useSelector(cartSelector);
-  console.log(items.length);
+  const carts=useSelector(cartSelector);
+  console.log(carts);
+  const dispatch=useDispatch();
+  useEffect(()=>{
+    dispatch(getTotal());
+  },[carts,dispatch])
+  
+  
+  console.log(carts.length);
   return (
     <div>
       <Header />
 
       <div>
         {/* {items.length} */}
-        {items.map((i) => (
+        {carts.map((i) => (
           <CartItem  item={i} />
         ))}
+        <span> Subtotal</span>
+
+        <span>{carts.totalAmount}</span>
+        
       </div>
     </div>
   );
