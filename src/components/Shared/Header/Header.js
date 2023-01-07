@@ -10,7 +10,7 @@ function Header(props) {
   var totalNoOfCartItem=0
   if(cartItemCount>cartItemCount2)
   { totalNoOfCartItem=cartItemCount}else{totalNoOfCartItem=cartItemCount2}
-  console.log(cartItemCount);
+  //console.log(cartItemCount);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,18 +39,19 @@ function Header(props) {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="flex-items navbar-nav me-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-              <a className="btn btn-warning icon-container" href="/cart">
+          
+              
               {/* <span> &nbsp; 
                 Cart &nbsp;</span> */}
-               <span> &nbsp; 
-                <Link to="Cart"> Cart </Link> &nbsp;</span>
+               <li className="nav-item"><span>  
+                <Link to="Cart" className="btn btn-warning icon-container">Cart  
                {
                 totalNoOfCartItem>0 &&
-                <span className="badge text-bg-primary">{totalNoOfCartItem}</span>
-               } 
-              </a>
-            </li>
+                <span className="badge text-bg-primary"> {totalNoOfCartItem}</span>
+               } </Link> </span>
+               </li>
+              
+            
             <li className="nav-item">
               <a className="nav-link active" aria-current="page" href="/register">
                 Register

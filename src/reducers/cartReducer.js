@@ -19,11 +19,11 @@ const cartSlice = createSlice({
             const itemIndex = state.value.findIndex((item)=>item.id === action.payload.id);
             if(itemIndex >=0){
                 state.value[itemIndex].quantity += 1;
-                console.log(state.value[itemIndex].quantity);
+                //console.log(state.value[itemIndex].quantity);
             }
             else{
                 const tempProduct = {...action.payload, quantity: 1};
-                console.log(tempProduct);
+                //console.log(tempProduct);
                 state.value.push(tempProduct); 
             }
                        
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
         removeFromCart:(state,action)=>{
             const filteredCart = state.value.filter((item) => item.id !== action.payload);
                 //console.log(filteredCart);
-                console.log(action.payload)
+                //console.log(action.payload)
                 state.value=filteredCart;
             
         },
@@ -60,8 +60,8 @@ const cartSlice = createSlice({
          
             state.totalPrice = parseFloat(price.toFixed(2));
             state.totalQuantity = quantity;
-            console.log(state.totalPrice);
-            console.log(state.totalQuantity);
+            //console.log(state.totalPrice);
+            //console.log(state.totalQuantity);
         },
         clearCart(state) {
             state.value = [];

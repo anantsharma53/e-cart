@@ -4,20 +4,20 @@ import CartItem from "../../components/CartItem/CartItem";
 import { useSelector, useDispatch } from "react-redux";
 import { cartSelector } from "../../reducers/cartReducer";
 import { getTotal, clearCart } from "../../reducers/cartReducer";
-//import { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from './../../components/Shared/Footer/Footer';
 const Cart = (props) => {
   const items = useSelector(cartSelector).value;
   const totaBill = useSelector(cartSelector).totalPrice;
   const totalQuantity=useSelector(cartSelector).totalQuantity;
-  console.log(items.length);
+  //console.log(items.length);
   const dispatch = useDispatch();
-  dispatch(getTotal());
-  // useEffect(()=>{
-  //   dispatch(getTotal());
-  // },[items,dispatch]) 
-  console.log(items.totalPrice)
+  //dispatch(getTotal());
+  useEffect(()=>{
+    dispatch(getTotal());
+  },[items,dispatch]) 
+  //console.log(totaBill)
   const handleClearCart = () => {
     dispatch(clearCart());
   };

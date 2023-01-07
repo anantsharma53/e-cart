@@ -9,6 +9,6 @@ const store = configureStore({
         cartItems:cartReducer   
     }
 });
-store.dispatch(getTotal());
+
 
 export default store;
