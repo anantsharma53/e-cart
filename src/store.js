@@ -1,7 +1,7 @@
 // Store manages data and reducers.
 
 import { configureStore } from "@reduxjs/toolkit";
-import cartReducer from "./reducers/cartReducer";
+import cartReducer, { getTotal } from "./reducers/cartReducer";
 
 
 const store = configureStore({
@@ -9,5 +9,6 @@ const store = configureStore({
         cartItems:cartReducer   
     }
 });
+store.dispatch(getTotal());
 
 export default store;

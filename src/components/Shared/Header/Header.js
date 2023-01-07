@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 
 function Header(props) {
   
-  const cartItemCount = useSelector(cartSelector).length;
+  const cartItemCount = useSelector(cartSelector).value.length;
+  const cartItemCount2 = useSelector(cartSelector).totalQuantity;
+  var totalNoOfCartItem=0
+  if(cartItemCount>cartItemCount2)
+  { totalNoOfCartItem=cartItemCount}else{totalNoOfCartItem=cartItemCount2}
+  console.log(cartItemCount);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -41,8 +46,8 @@ function Header(props) {
                <span> &nbsp; 
                 <Link to="Cart"> Cart </Link> &nbsp;</span>
                {
-                cartItemCount>0 &&
-                <span className="badge text-bg-primary">{cartItemCount}</span>
+                totalNoOfCartItem>0 &&
+                <span className="badge text-bg-primary">{totalNoOfCartItem}</span>
                } 
               </a>
             </li>

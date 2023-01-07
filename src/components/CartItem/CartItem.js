@@ -26,19 +26,23 @@ function CartItem(props) {
   
   return (
     <div className="cartItem">
-      
       <img src={props.item.image}></img>
-      <p>{props.item.title}</p>
       <div>
-        <button onClick={handelRemoveFromCart} className="btn btn-success">Remove from Cart</button>
+      <p>{props.item.title}</p>
+      <h4 onClick={handelRemoveFromCart} className="navbar-brand removeBtn" >Remove From Cart</h4>
+        {/* <button onClick={handelRemoveFromCart} className="btn-group btn-group-sm">Remove</button> */}
       </div>
-      <p>{props.item.price}</p>
+      <div>
+      <span className="itemRate">Price: </span>
+      <span>{props.item.price}/pcs</span>
+      </div>
       <div>
         <button onClick={handelAddItemQuantity} className="btn btn-success">+</button>{' '}
         <button onClick={handelRemoveQuantity} className="btn btn-success">-</button>
       </div>
-      <p>{props.item.quantity}X{props.item.price}={props.item.quantity * props.item.price}</p>
+      <p>{props.item.quantity}Pcs X {props.item.price} = {props.item.quantity * props.item.price}</p> 
     </div>
+
   );
 }
 
